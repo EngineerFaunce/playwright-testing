@@ -1,9 +1,9 @@
-const { webkit } = require('playwright');
-const expect = require('expect');
+const { chromium, firefox, webkit } = require('playwright');
+const browserName = process.env.BROWSER || 'chromium';
 let browser;
 let page;
 beforeAll(async () => {
-  browser = await webkit.launch();
+  browser = await {chromium, webkit, firefox}[browserName].launch({ headless: false, slowMo: 5000});
 });
 afterAll(async () => {
   await browser.close();
